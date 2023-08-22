@@ -1,9 +1,12 @@
+import PropTypes from 'prop-types';
 import { useState, useRef } from 'react';
-import { FaTrash } from "react-icons/fa";
-import { AiFillEdit } from "react-icons/ai";
+import { FaTrash } from 'react-icons/fa';
+import { AiFillEdit } from 'react-icons/ai';
 import styles from '@/styles/TodoItem.module.css';
 
-const TodoItem = ({ itemProp, handleChange, delTodo, setUpdate }) => {
+const TodoItem = ({
+  itemProp, handleChange, delTodo, setUpdate,
+}) => {
   const editInputRef = useRef(null);
   const [editing, setEditing] = useState(false);
   const completedStyle = {
@@ -15,8 +18,8 @@ const TodoItem = ({ itemProp, handleChange, delTodo, setUpdate }) => {
   const handleEditing = () => {
     setEditing(true);
   };
-  let viewMode = {};
-  let editMode = {};
+  const viewMode = {};
+  const editMode = {};
   if (editing) {
     viewMode.display = 'none';
   } else {
@@ -28,7 +31,7 @@ const TodoItem = ({ itemProp, handleChange, delTodo, setUpdate }) => {
       setEditing(false);
     }
   };
-  
+
   return (
     <li className={styles.item}>
       <div className={styles.content} style={viewMode}>
@@ -38,10 +41,10 @@ const TodoItem = ({ itemProp, handleChange, delTodo, setUpdate }) => {
           onChange={() => handleChange(itemProp.id)}
         />
         <button onClick={handleEditing}>
-          <AiFillEdit style={{ color: "#5e5e5e", fontSize: "16px" }} />
+          <AiFillEdit style={{ color: '#5e5e5e', fontSize: '16px' }} />
         </button>
         <button onClick={() => delTodo(itemProp.id)}>
-          <FaTrash style={{ color: "#5e5e5e", fontSize: "16px" }}/>
+          <FaTrash style={{ color: '#5e5e5e', fontSize: '16px' }} />
         </button>
         <span style={itemProp.completed ? completedStyle : null}>
           {itemProp.title}
@@ -58,4 +61,12 @@ const TodoItem = ({ itemProp, handleChange, delTodo, setUpdate }) => {
     </li>
   );
 };
+
+TodoItem.propTypes = {
+  itemProp: PropTypes.object.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  delTodo: PropTypes.func.isRequired,
+  setUpdate: PropTypes.func.isRequired,
+};
+
 export default TodoItem;

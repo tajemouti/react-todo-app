@@ -45,13 +45,11 @@ const TodosLogic = () => {
     );
   };
   function getInitialTodos() {
-    // getting stored items
     const temp = localStorage.getItem('todos');
     const savedTodos = JSON.parse(temp);
     return savedTodos || [];
-  };
+  }
   useEffect(() => {
-    // storing todos items
     const temp = JSON.stringify(todos);
     localStorage.setItem('todos', temp);
   }, [todos]);
@@ -68,4 +66,5 @@ const TodosLogic = () => {
     </div>
   );
 };
+
 export default TodosLogic;
